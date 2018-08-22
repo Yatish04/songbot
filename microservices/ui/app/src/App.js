@@ -149,7 +149,7 @@ class Chat extends React.Component {
       console.log('Fetch Error :-S', error);
       //In case network error
       currentHistory.pop();
-      let obj= [{ type: 'bot', message: 'Network Error! Try again!', mtype: 'text', data: {},loading: false}]
+      let obj= [{ type: 'bot', message: 'Something went wrong! Try again!', mtype: 'text', data: {},loading: false}]
       currentHistory =currentHistory.concat(obj);
       this.setState({chatHistory: currentHistory});
       this.refs.scrollbars.scrollToBottom();

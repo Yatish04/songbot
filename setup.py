@@ -1,5 +1,5 @@
 import os
-
+import time
 import webbrowser
 
 print("Beginning set-up")
@@ -10,14 +10,29 @@ print("Step2-> adding the git repository")
 os.system("git add .")
 print("Step 3->commit and pushing to hasura cluster")
 os.system("git commit -m'Initial Commit'")
-os.system("git push hasura master")
+x=os.system("git push hasura master")
+
+if(x!=0):
+    print("Remote server :EROR Redeploying it may take seconds...")
+while(x!=0):
+    time.sleep(1)
+    x=os.system("git push hasura master")
+
+import yaml
+with open("clusters.yaml", 'r') as stream:
+    try:
+        clustername=yaml.load(stream)[0]['name']
+        print(clustername)
+    except yaml.YAMLError as exc:
+        print(exc)
+
 
 print("Deployement succesfull!!")
-print("Trying to open the url..")
+print("Trying to open the url..Hold on.........")
 
-with open("temp.txt",'r') as fh:
-    cluster=fh.read()
+time.sleep(10)
+
 try:
-    webbrowser.open("https://ui."+cluster+".hasura-app.io/")
+    webbrowser.open("https://ui."+clustername+".hasura-app.io/")
 except:
-    print("Opening failed.Try opening manually..")
+    print("Opening failed.Try "+"https://ui."+clustername+".hasura-app.io/"+" opening manually..")

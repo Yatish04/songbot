@@ -9,10 +9,6 @@ with open("clusters.yaml", 'r') as stream:
         print(exc)
 
 
-with open("temp.txt",'w') as  fh:
-    fh.write(clustername)
-
-
 
 
 with fileinput.FileInput("microservices/ui/app/src/App.js", inplace=True, backup='.bak') as file:
